@@ -1,15 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
 import { SelectProfileContainer } from "./profiles";
 import { FirebaseContext } from "../context/firebase";
-import { Header, Loading } from "../components";
+import { Card, Header, Loading } from "../components";
 import * as ROUTES from "../constants/routes";
 import logo from "../logo.svg";
 
 export default function BrowseContainer({ slides }) {
+  const [category, setCategory] = useState("series");
+  const [searchTerm, setSearchTerm] = useState("");
   const [profile, setProfile] = useState({});
   const [loading, setLoading] = useState(true);
-  const { firebase } = useContext(FirebaseContext);
 
+  const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
 
   useEffect(() => {
@@ -19,6 +21,10 @@ export default function BrowseContainer({ slides }) {
     }, 3000);
   }, [profile.displayName]);
 
+
+  useEffect(() => {
+   
+  }, [])
   //console.log(user);
 
   return profile.displayName ? (
@@ -32,6 +38,11 @@ export default function BrowseContainer({ slides }) {
             <Header.TextLink>Films</Header.TextLink>
           </Header.Group>
           <Header.Group>
+            <Header.Search
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+            />
+
             <Header.Profile>
               <Header.Picture src={user.photoURL} />
               <Header.Dropdown>
@@ -40,7 +51,9 @@ export default function BrowseContainer({ slides }) {
                   <Header.TextLink>{user.displayName}</Header.TextLink>
                 </Header.Group>
                 <Header.Group>
-                  <Header.TextLink onClick={()=> firebase.auth().signOut()}>Sign Out</Header.TextLink>
+                  <Header.TextLink onClick={() => firebase.auth().signOut()}>
+                    Sign Out
+                  </Header.TextLink>
                 </Header.Group>
               </Header.Dropdown>
             </Header.Profile>
@@ -55,10 +68,17 @@ export default function BrowseContainer({ slides }) {
             he projects in a futile attempt to feel like he's part of the world
             around him.
           </Header.Text>
+          <Header.PlayButton>Play</Header.PlayButton>
         </Header.Feature>
       </Header>
+
+      <Card.Group></Card.Group>
     </>
   ) : (
     <SelectProfileContainer user={user} setProfile={setProfile} />
   );
 }
+
+//16-05-21 software arch and design
+//17-05-21 ml
+//18-05-21 web frameworks
