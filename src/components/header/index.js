@@ -82,7 +82,7 @@ Header.Search = function HeaderSearch({
         <img src="/images/icons/search.png" alt="Search" />
       </SearchIcon>
       <SearchInput
-        value={setSearchTerm}
+        value={searchTerm}
         onChange={({ target }) => setSearchTerm(target.value)}
         placeholder="Search films and series"
         active={searchActive}
