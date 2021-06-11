@@ -1,4 +1,4 @@
-# Facebook NextJs Clone
+# Netflix ReactJs Clone
 
 This is a Netflix Streaming Website Clone , Build with React. Used Styled Components CSS for styling.
 
